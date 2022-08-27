@@ -16,13 +16,13 @@ restic backup \
 	--one-file-system \
 	--exclude-caches \
 	--exclude={$EXCLUDE} \
-	$EXTRA_ARGS / > "/tmp/backup_$CURRENT_DATE"
+	$EXTRA_ARGS / > "/tmp/backup_$CURRENT_DATE" 2>&1
 
 restic snapshots $EXTRA_ARGS \
 	| tail -n 4 \
 	| head -n 2 \
 	| cut -f 1 -d ' ' \
-	| xargs restic diff $EXTRA_ARGS >> "/tmp/backup_$CURRENT_DATE"
+	| xargs restic diff $EXTRA_ARGS >> "/tmp/backup_$CURRENT_DATE" 2>&1
 
 mail -s "Backup Report Workstation $CURRENT_DATE" $REPORT_MAIL < "/tmp/backup_$CURRENT_DATE"
 

@@ -1,10 +1,12 @@
 #!/bin/bash
 set -e
 
+set -o allexport
 source ./restic.conf
+set +o allexport
 
 EXTRA_ARGS=
-CURRENT_DATE=$(date +%m_%d_%y_%H_%M_%S)
+export CURRENT_DATE=$(date +%m_%d_%y_%H_%M_%S)
 
 if [ -n "$CA" ]
 then
